@@ -1,0 +1,6 @@
+@import "blueprint/fancy-type";
+body { @include fancy-type; }
+#new-ticket {
+  border: black solid 1px;
+  padding: 10px;
+}

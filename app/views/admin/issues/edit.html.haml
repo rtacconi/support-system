@@ -1,0 +1,55 @@
+.span-4 
+  Latest activities
+.span-16
+  Change status:
+  = select(:issue, :status, Status.all.collect {|s| [ s.name, s.id ] }, {:include_blank => true})
+
+  %table
+    %tr
+      %td Ref.
+      %td= @issue.reference
+    %tr
+      %td Status
+      %td= @issue.status.name
+    %tr
+      %td Name:
+      %td= @issue.name
+    %tr
+      %td Email:
+      %td= @issue.email
+    %tr
+      %td Department:
+      %td= @issue.department
+    %tr
+      %td Subject:
+      %td= @issue.subject
+    %tr  
+      %td Description:
+      %td= @issue.body
+    %tr  
+      %td Created at:
+      %td= @issue.created_at
+    %tr
+      %td Owner
+      %td
+        = @issue.user.name if @issue.user.present?
+        - form_tag("/admin/issues/#{@issue.id}/make_owner", :remote => true) do
+          = submit_tag "Take ownership"
+  
+  %hr
+  %h3 Reply
+  - form_tag(reply_url(@issue.id), :method => 'post') do
+    = text_area_tag(:response)
+    %br= submit_tag("Send your reply")
+  
+  %hr
+  %h3 Issue tracker
+  - if @its.present?
+    - @its.each do |it|
+      %div
+      = it.change
+      , 
+      = it.updated_at
+    
+.span-4.last
+  = link_to('Manage issues', admin_issues_url) if user_signed_in?

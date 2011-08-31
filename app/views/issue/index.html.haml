@@ -1,0 +1,21 @@
+.span-4 
+  Your Issues:
+  
+.span-16
+  #new-ticket
+    - form_for Issue.new do |f|
+      .label= f.label 'name *'
+      %div= f.text_field :name
+      .label= f.label 'email *'
+      %div= f.text_field :email
+      .label= f.label :department
+      %div= f.text_field :department
+      .label= f.label 'subject *'
+      %div= f.text_field :subject
+      .label= f.label 'Type here a complete description of the issue *'
+      %div= f.text_area :body
+      %br/
+      %div= f.submit 'Send Issue'
+      * required fields
+.span-4.last
+  = link_to('Manage issues', admin_issues_url) if user_signed_in?

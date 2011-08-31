@@ -1,0 +1,26 @@
+.span-4 
+  Latest activities
+.span-16
+  %p= "Filter: " + (params[:filter] ||= "") 
+  = link_to 'New unassigned tickets', admin_issues_url
+  = link_to 'Open Tickets', :filter => 'open_issues'
+  = link_to 'On hold tickets', :filter => 'on_hold_issues'
+  = link_to 'Closed Tickets', admin_issues_url, :filter => 'closed_issues'
+  %hr
+  %table
+    %tr
+      %th Ref.
+      %th Subject
+      %th Status
+      %th Owner
+      %th Created at
+    - @issues.each do |issue|
+      %tr
+        %td= link_to issue.reference, :action => 'edit', :id => issue.id
+        %td= issue.subject
+        %td= issue.status.name
+        %td= issue.user.name if issue.user.present?
+        %td= issue.created_at
+.span-4.last
+  = link_to('Manage issues', admin_issues_url) if user_signed_in?
+

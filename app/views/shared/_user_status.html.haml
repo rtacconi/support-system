@@ -1,0 +1,6 @@
+- if user_signed_in?
+  User: 
+  = current_user.name
+  %br= link_to 'Sign out', destroy_user_session_url
+- else
+  = link_to 'Log in', new_user_session_url

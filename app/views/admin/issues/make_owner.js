@@ -1,0 +1,1 @@
+alert('You are now the owner of <%= @issue.reference %>')
