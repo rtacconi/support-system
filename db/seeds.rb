@@ -5,4 +5,14 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
-Status.init_statuses
+Status.create([{:name => 'Waiting for Staff Response'},
+               {:name => 'Waiting for Customer'},
+               {:name => 'On Hold'},
+               {:name => 'Cancelled'}, 
+               {:name =>'Completed'}])
+               
+u = User.new(:email => 'admin@support.com',
+             :password => 'asdf123',
+             :password_confirmation => 'asdf123')
+u.name = 'admin'
+u.save
